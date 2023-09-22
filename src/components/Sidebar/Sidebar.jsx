@@ -3,30 +3,31 @@ import React, { useState } from 'react';
 import * as S from './Style';
 import { GoHomeFill, GoHome } from 'react-icons/go'
 import { FiSearch, FiInstagram } from 'react-icons/fi'
-import { LuPlusSquare } from 'react-icons/lu'
+
 import { TiCompass } from 'react-icons/ti'
 import { AiFillPlusSquare, AiOutlinePlusSquare } from 'react-icons/ai'
 import { useNavigate } from 'react-router';
 import NavItem from './NavItem/NavItem';
 
 function Sidebar(props) {
-    const [ isSelectedList, useIsSelectedList ] = useState([true, false, false, false]);
-    const navigate = useNavigate()
+
+    const [ isSelectedList, setIsSelectedList ] = useState([true, false, false, false]);
+
 
     const handleHomeClick = () => {
-        useIsSelectedList([true, false, false, false])
+        setIsSelectedList([true, false, false, false])
     }
     const handleSearchClick = () => {
-        useIsSelectedList([false, true, false, false])
+        setIsSelectedList([false, true, false, false])
     }
     const handleAddContentClick = () => {
-        useIsSelectedList([false, false, true, false])
+        setIsSelectedList([false, false, true, false])
     }
     const handleProfileClick = () => {
-        useIsSelectedList([false, false, false, true])
+        setIsSelectedList([false, false, false, true])
     }
     const handleCompassClick = () => {
-        useIsSelectedList([false, false, false, false])
+        setIsSelectedList([false, false, false, false])
     }
     
     return (

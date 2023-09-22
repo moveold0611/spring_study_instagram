@@ -7,7 +7,7 @@ function NavItem({ children, onclick }) {
 
     return (
         <div css={S.SLayout} onClick={onclick}>
-            { children }
+            {children}
         </div>
     );
 }
