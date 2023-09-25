@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Configuration //Component(Ioc 컨테이너에 객체 생성)
+@Configuration //Component(Ioc 컨테이너에 설정 관련 객체 생성)
 public class MvcConfig implements WebMvcConfigurer {
 
     @Override

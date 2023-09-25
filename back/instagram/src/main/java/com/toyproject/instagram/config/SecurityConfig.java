@@ -21,9 +21,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors(); // WebMVCConfig에서 설정한 cors 정책을 따르겠다.
         http.csrf().disable(); // csrf 토큰 비활성화
+        //
+
         http.authorizeRequests()
-                .antMatchers("/api/v1/auth/**") // 주소값 이하의 요청 허용
-                .permitAll(); // 모든 요청 허용
+                .antMatchers("/api/v1/auth/**") // 주소값 이하
+                .permitAll(); // 요청 허용
 
     }
 }

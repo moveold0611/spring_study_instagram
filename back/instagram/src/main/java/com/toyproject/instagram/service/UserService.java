@@ -12,6 +12,7 @@ public class UserService {
 
     private final UserMapper userMapper;
     private final BCryptPasswordEncoder passwordEncoder;
+    // @Service UserService를 생성할 때 반드시 생성되야하는 상수 객체 UserMapper,BCryptPasswordEncoder를 자동으로 생성함
 
     public void signupUser(SignupReqDto signupReqDto) {
        Integer executeCount = userMapper.saveUser(signupReqDto.toUserEntity(passwordEncoder));
