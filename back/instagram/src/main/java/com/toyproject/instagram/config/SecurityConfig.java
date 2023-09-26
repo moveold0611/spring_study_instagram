@@ -1,5 +1,7 @@
 package com.toyproject.instagram.config;
 
+import com.toyproject.instagram.exception.AuthenticateExceptionEntryPoint;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -7,10 +9,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 @EnableWebSecurity // 직접만든 security 이용
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final AuthenticateExceptionEntryPoint authenticateExceptionEntryPoint;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -25,7 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/api/v1/auth/**") // 주소값 이하
-                .permitAll(); // 요청 허용
+                .permitAll() // 요청 허용
+                .anyRequest() // 나머지는??
+                .authenticated() // 인증 받아라
+                .and() // 그리고
+                .exceptionHandling()
+                .authenticationEntryPoint(authenticateExceptionEntryPoint);
 
     }
 }

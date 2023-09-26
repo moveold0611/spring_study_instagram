@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { NAME, PASSWORD, PHONE_AND_EMAIL, USERNAME } from '../../../../constants/regex';
+import { NAME, PASSWORD, PHONE_OR_EMAIL, USERNAME } from '../../../../constants/regex';
 import * as S from './Style';
 import React, { useEffect, useState } from 'react';
 import { BsCheckCircle } from 'react-icons/bs';
@@ -19,8 +19,8 @@ function Input({ type, placeholder, name, changeAccount }) {
         const value = e.target.value;
         let regex = null;
         switch(e.target.name) {
-            case "phoneAndEmail": 
-                regex = PHONE_AND_EMAIL;
+            case "phoneOrEmail": 
+                regex = PHONE_OR_EMAIL;
                 break;
             case "name":
                 regex = NAME;
@@ -35,12 +35,13 @@ function Input({ type, placeholder, name, changeAccount }) {
         }
 
         if(!!regex && !regex.test(value)) {
-            setInputState(<><ImCancelCircle/></>)
-            return;
-        // }else if(!!regex && regex.test(value)) {
-        //     setInputState(<><BsCheckCircle/></>)
-        // }else {
-        //     setInputState("")
+            setInputState(<><ImCancelCircle /></>);
+
+        }else if(!!regex && regex.test(value)) {
+            setInputState(<><BsCheckCircle /></>);
+
+        }else {
+            setInputState("");
         }
     }
 

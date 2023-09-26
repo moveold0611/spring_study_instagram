@@ -4,12 +4,14 @@ import Top from '../../components/Layouts/SignInAndUpLayout/Top/Top';
 import Input from '../../components/Layouts/SignInAndUpLayout/Input/Input';
 import OrBar from '../../components/Layouts/SignInAndUpLayout/OrBar/OrBar';
 import { useNavigate } from 'react-router';
+import { signin } from '../../apis/api/account';
 
 function Signin(props) {
     const navigate = useNavigate();
+
     const emptyAccount = {
-        phoneAndEmailAndUsername : "",
-        password : ""
+        phoneOrEmailOrUsername : "",
+        loginPassword : ""
     }
     const [ account, setAccount ] = useState(emptyAccount);
     const [ isAccountValuesEmpty, setIsAccountValuesEmpty ] = useState(true);
@@ -28,16 +30,29 @@ function Signin(props) {
     }, [account])
 
 
-    return (
+    const handleSigninSubmit = async () => {
+        console.log(account)
+        try {
+            await signin(account);            
+        } catch (error) {
+            setErrorMessage(error.response.data.errorMessage)
+        }
+    }
+
+
+    return (    
         <div>
         <SignInAndUpLayout>
             <Top>
-                <Input name={"phoneAndEmailAndUsername"} placeholder={"폰 이메일 기타 머시기"} changeAccount={changeAccount}/>
-                <Input type={"password"} name={"password"} changeAccount={changeAccount} placeholder={"비번"}/>
-                <button disabled={isAccountValuesEmpty}>로그인</button>
+                <Input name={"phoneOrEmailOrUsername"} placeholder={"폰 이메일 기타 머시기"} changeAccount={changeAccount}/>
+                <Input type={"password"} name={"loginPassword"} changeAccount={changeAccount} placeholder={"비번"}/>
+                <button onClick={handleSigninSubmit} >로그인</button>
                 <OrBar/>
                 <div>
                     kakao로 로그인
+                </div>
+                <div>
+                    {errorMessage}
                 </div>
             </Top>
         </SignInAndUpLayout>

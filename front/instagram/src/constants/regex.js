@@ -1,4 +1,4 @@
-export const PHONE_AND_EMAIL 
+export const PHONE_OR_EMAIL 
     = /[a-zA-Z]{1}[a-zA-Z0-9]+@[0-9a-zA-Z]+\.[a-z]*\.?[a-z]$|^[0-9]{11}$/;
 
 export const NAME
@@ -9,3 +9,7 @@ export const USERNAME
 
 export const PASSWORD
     = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()]).{8,25}$/;
+
+    // MSA 질문 - 하나의 기능에만 부하가 걸리면?
+
+    

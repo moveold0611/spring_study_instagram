@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router';
 function Signup(props) {
     const navigate = useNavigate();
     const emptyAccount = {
-        phoneAndEmail : "",
+        phoneOrEmail : "",
         name : "",
         username : "",
         password : ""
@@ -41,8 +41,8 @@ function Signup(props) {
             const keys = Object.keys(responseErrorMessage);
             if(keys.includes("username")) {
                 setErrorMessage(responseErrorMessage.username)
-            }else if(keys.includes("phoneAndEmail")) {
-                setErrorMessage(responseErrorMessage.phoneAndEmail)
+            }else if(keys.includes("phoneOrEmail")) {
+                setErrorMessage(responseErrorMessage.phoneOrEmail)
             }else if(keys.includes("name")) {
                 setErrorMessage(responseErrorMessage.name)
             }else if(keys.includes("password")) {
@@ -65,7 +65,7 @@ function Signup(props) {
                     kakao로 로그인
                 </button>
                 <OrBar/>
-                <Input placeholder={"휴대폰 번호 또는 이메일 주소"} changeAccount={changeAccount} name={"phoneAndEmail"}/>
+                <Input placeholder={"휴대폰 번호 또는 이메일 주소"} changeAccount={changeAccount} name={"phoneOrEmail"}/>
                 <Input placeholder={"성명"} changeAccount={changeAccount} name={"name"}/>
                 <Input placeholder={"사용자 이름"} changeAccount={changeAccount} name={"username"}/>
                 <Input type={"password"} placeholder={"비밀번호"} changeAccount={changeAccount} name={"password"}/>

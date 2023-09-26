@@ -15,7 +15,7 @@ public class SignupReqDto {
 //    @Pattern(regexp = "^[a-zA-Z]{1}[a-zA-Z0-9]+@[0-9a-zA-Z]+\\.[a-z]*\\.?[a-z]*$ | ^[0-9]{11}+$", message = "이메일 또는 전화번호를 다시 확인해주세요.")
     @Pattern(regexp = "^[a-zA-Z0-9]+@[0-9a-zA-Z]+\\.[a-z]*$|^[0-9]{11}$", message = "이메일 또는 전화번호를 다시 확인해주세요.")
 //     "^[A-Za-z0-9+_.-]+@(.+)$"
-    private String phoneAndEmail;
+    private String phoneOrEmail;
 
 //    @NotBlank(message = "이름은 빈 값일 수 없습니다.")
     @Pattern(regexp = "^[가-힣]{2,6}$", message = "이름 형식을 다시 확인해주세요.")
@@ -31,8 +31,7 @@ public class SignupReqDto {
 
     public User toUserEntity(BCryptPasswordEncoder passwordEncoder) {
         return User.builder()
-                .email(phoneAndEmail)
-//                .phone()
+                .email(phoneOrEmail)
                 .name(name)
                 .username(username)
                 .password(passwordEncoder.encode(password))
