@@ -6,6 +6,8 @@ import OrBar from '../../components/Layouts/SignInAndUpLayout/OrBar/OrBar';
 import { useNavigate } from 'react-router';
 import { signin } from '../../apis/api/account';
 
+
+
 function Signin(props) {
     const navigate = useNavigate();
 
@@ -17,6 +19,7 @@ function Signin(props) {
     const [ isAccountValuesEmpty, setIsAccountValuesEmpty ] = useState(true);
     const [ errorMessage, setErrorMessage ] = useState("");
 
+
     const changeAccount = (name, value) => {
         setAccount({
             ...account,
@@ -24,22 +27,21 @@ function Signin(props) {
         })
     }
 
-
     useEffect(() => {
         setIsAccountValuesEmpty(Object.values(account).includes(""))
     }, [account])
 
 
     const handleSigninSubmit = async () => {
-        console.log(1)
         try {
             const response = await signin(account);
             localStorage.setItem("accessToken", "Bearer " + response.data);
             // Bearer -> JWT 토큰을 사용할때 암묵적 헤더
-            navigate("/");
+            window.location.replace("/")
         } catch (error) {
             setErrorMessage(error.response.data.errorMessage)
         }
+
     }
 
 

@@ -14,7 +14,7 @@ function App() {
     <RootLayout>
       {/* <Sidebar/> */}
       <Routes>
-        <Route path="" element={ <AuthRoute element={ <div>HOME</div> }/> }/>
+        <Route path="/" element={ <AuthRoute element={ <div>HOME</div> }/> }/>
         <Route path="/account/emailssignup" element={ <AuthRoute element={ <Signup/> }/> }/>
         <Route path="/account/login" element={ <AuthRoute element={ <Signin/> }/> }/>
         <Route path="/:username" element={<div>test2</div>}/>

@@ -9,7 +9,3 @@ export const USERNAME
 
 export const PASSWORD
     = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()]).{8,25}$/;
-
-    // MSA 질문 - 하나의 기능에만 부하가 걸리면?
-
-    

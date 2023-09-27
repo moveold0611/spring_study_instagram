@@ -8,13 +8,14 @@ import { Reset } from "styled-reset";
 import { Global } from "@emotion/react";
 import { Common } from './styles/Global/Common';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(  
-  <BrowserRouter>
-    <Global styles={Common}/>
-    <Reset/>
-    <App />
-  </BrowserRouter>  
+root.render( 
+    <BrowserRouter>
+      <Global styles={Common}/>
+      <Reset/>
+      <App />
+    </BrowserRouter>  
 );
 
 reportWebVitals();
