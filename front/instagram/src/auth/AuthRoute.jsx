@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { authenticate } from '../apis/api/account';
 
 function AuthRoute({ element }) {
     const navigate = useNavigate();
@@ -7,6 +8,16 @@ function AuthRoute({ element }) {
     const pathname = location.pathname;
     const permitAllPath = ["/account"];
     const [ authenticated, setAuthenticated ] = useState(false);
+
+    useEffect(() => {
+        // const response = await authenticate();
+        authenticate().then(response => {
+            setAuthenticated(response.data);
+        }).catch(error => {
+            alert(error.response.data)
+            setAuthenticated(false);
+        })
+    }, []);
 
     for(let path of permitAllPath) {
         if(pathname.startsWith(path)) {

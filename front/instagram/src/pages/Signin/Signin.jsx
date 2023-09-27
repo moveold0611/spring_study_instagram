@@ -31,9 +31,12 @@ function Signin(props) {
 
 
     const handleSigninSubmit = async () => {
-        console.log(account)
+        console.log(1)
         try {
-            await signin(account);            
+            const response = await signin(account);
+            localStorage.setItem("accessToken", "Bearer " + response.data);
+            // Bearer -> JWT 토큰을 사용할때 암묵적 헤더
+            navigate("/");
         } catch (error) {
             setErrorMessage(error.response.data.errorMessage)
         }
