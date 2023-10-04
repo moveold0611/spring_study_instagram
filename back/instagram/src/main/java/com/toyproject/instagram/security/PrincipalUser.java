@@ -1,25 +1,35 @@
 package com.toyproject.instagram.security;
 
+import com.toyproject.instagram.entity.Authority;
 import com.toyproject.instagram.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class PrincipalUser implements UserDetails {
 
     private String phoneOrEmailOrUsername;
     private String password;
+    private List<Authority> authorities;
 
-    public PrincipalUser(String phoneOrEmailOrUsername, String password) {
+    public PrincipalUser(String phoneOrEmailOrUsername, String password, List<Authority> authorities) {
         this.phoneOrEmailOrUsername = phoneOrEmailOrUsername;
         this.password = password;
+        this.authorities = authorities;
     }
 
     // 로그인 권한 3가지
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
+        authorities.forEach(authority ->
+                authorityList.add
+                        (new SimpleGrantedAuthority(authority.getRole().getRoleName())));
         return null;
     }
 
@@ -32,7 +42,6 @@ public class PrincipalUser implements UserDetails {
     public String getUsername() {
         return phoneOrEmailOrUsername;
     }
-
 
     
     // 계정 만료 -> 사용 기간이 정해진 계정
