@@ -6,8 +6,6 @@ export const SLayout = css`
     width: 73px;
     height: 100%;
 `
-
-
 export const SIconBox = css`
     /* width: 100%;
     height: 100%; */

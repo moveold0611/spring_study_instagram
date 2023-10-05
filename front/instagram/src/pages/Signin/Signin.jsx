@@ -3,15 +3,11 @@ import SignInAndUpLayout from '../../components/Layouts/SignInAndUpLayout/SignIn
 import Top from '../../components/Layouts/SignInAndUpLayout/Top/Top';
 import Input from '../../components/Layouts/SignInAndUpLayout/Input/Input';
 import OrBar from '../../components/Layouts/SignInAndUpLayout/OrBar/OrBar';
-import { useNavigate } from 'react-router';
 import { signin } from '../../apis/api/account';
-import { useQueryClient } from 'react-query';
 
 
 
 function Signin(props) {
-    const navigate = useNavigate();
-    const queryClient = useQueryClient();
 
     const emptyAccount = {
         phoneOrEmailOrUsername : "",
