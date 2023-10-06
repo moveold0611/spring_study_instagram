@@ -1,4 +1,8 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/instagram
@@ -11,3 +15,4 @@ mybatis:
 
 jwt:
   secret: QoCRJiglQY5gxz8FFCqouRUqCxVBiKR67ER/FW2aTmjFzCQ04vF/Bcx+OBfsFSzWsmRCt/GKT+5CgOjiClVs/w==
+

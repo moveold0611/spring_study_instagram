@@ -9,6 +9,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { HiArrowNarrowLeft } from 'react-icons/hi'
+import profileImg from '../../../assets/logo192.png'
+import { uploadFeed } from '../../../apis/api/feed';
 
 function SelectFeedImg({ setFiles, setPage }) {
     // 페이지 1
@@ -59,7 +61,7 @@ function SelectFeedImg({ setFiles, setPage }) {
 
            <input accept='image/gif, image/jpeg, image/jpg, image/png'
            css={S.SFileInput} 
-           type='file' multiple
+           type='file' multiple={true}
            name="file" 
            ref={fileInputRef}
            onChange={handleImgFileChange}>
@@ -110,17 +112,59 @@ function ReviewFeedImg({ files }) {
     )
 }
 
+function FeedDetaile({ isShow, setContent }) {
+
+    useEffect(() => {
+
+    }, [])
+    
+    const handleContentOnChange = (e) => {
+        console.log(e.target.value)
+        setContent(e.target.value);
+    }
+
+    return (
+        <div css={S.FeedDetaileContainer(isShow)}>
+            <div css={S.ProfileContainer}>
+                <div css={S.ProfileImgBox}>
+                    <img src={profileImg} alt=''/>
+                </div>
+                <div>moveold0611</div>
+            </div>
+            <div>
+                <textarea placeholder='문구를 입력하세요..?' 
+                css={S.FeedContent} name='content' onChange={handleContentOnChange}></textarea>
+            </div>
+        </div>
+    )
+}
+
+function AbleFeed({ files, isShowFeedDetaile, content }) {
+    return (
+        <>
+            <ReviewFeedImg files={files}/> 
+            <FeedDetaile isShow={isShowFeedDetaile} setContent={content}/> 
+        </>
+    )
+}
+
 function AddFeedModal(props) {
     const [ page, setPage ] = useState(1);
-    const [ files, setFiles ] = useState([]);
-    const [ bodyComponent, setBodyComponent ] = useState();
-
+    const [ bodyComponent, setBodyComponent ] = useState(<></>);
+    const [ isShowFeedDetaile, setIsShowFeedDetaile ] = useState(false);
+    const [ title , setTitle ] = useState();
+    
     const [ leftButton, setLeftButton ] = useState(<div></div>);
     const [ rightButton, setRightButton ] = useState(<div></div>);
+    
+    const [ files, setFiles ] = useState([]);
+    const [ content, setContent ] = useState("");
+
+
 
     const BackButton = () => {
         return (
-            <div onClick={setPage(page - 1)}>
+            <div onClick={() =>{setPage(page - 1)}}>
                 <HiArrowNarrowLeft/>
             </div>
         )
@@ -128,35 +172,68 @@ function AddFeedModal(props) {
 
     const NextButton = () => {
         return(
-            <div onClick={setPage(page + 1)}>
+            <div onClick={() =>{setPage(page + 1)}}>
                 <span>다음</span>
             </div>
+        )
+    }
+
+    const SubmitButton = () => {
+        const handleSubmitClick = async () => {
+            const formData = new FormData();
+            // 이미지는 서버에 json이 아닌 FormData로 전송
+            formData.append("content", content);
+            const fileArray = Array.from(files);
+            fileArray.forEach(file => {
+                formData.append("files", file)
+            })
+            try {
+                const response = await uploadFeed(formData);                
+                console.log(response.data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        return (
+            <div onClick={handleSubmitClick}>
+            <span>공유하기</span>
+        </div>
         )
     }
 
     useEffect(() => {
         switch(page) {
             case 1:
+                console.log(page)
+                setTitle("새 게시물 만들기");
                 setBodyComponent(<SelectFeedImg setFiles={setFiles} setPage={setPage}/>);
                 setLeftButton(<div></div>);
                 setRightButton(<div></div>);
                 break;
-            case 2:
-                setBodyComponent(<ReviewFeedImg files={files}/>);
+            case 2: 
+                console.log(page)
+                setBodyComponent(<AbleFeed files={files} isShowFeedDetaile={isShowFeedDetaile} content={setContent} />);
+                setTitle("미리보기");
+                setIsShowFeedDetaile(false);
                 setLeftButton(BackButton());
                 setRightButton(NextButton());
                 break;            
             case 3:
-                // setBodyComponent(<></>);
-                // setLeftButton(BackButton);
-                // break;
+                console.log(page)
+                setTitle("새 게시물 만들기");
+                setBodyComponent(<AbleFeed files={files} isShowFeedDetaile={isShowFeedDetaile} content={setContent} />);
+                setIsShowFeedDetaile(true);
+                setLeftButton(BackButton);
+                setRightButton(SubmitButton());
+                break;
             default:
         }
-    }, [page]);
+    }, [page, isShowFeedDetaile, content]);
 
     return (
         <ModalLayout>
-            <ModalHeader title={"새 게시물 만들기"} leftButton={leftButton} rightButton={rightButton}/>
+            <ModalHeader title={title} leftButton={leftButton} rightButton={rightButton}/>
             <ModalBody>
                 {bodyComponent}
             </ModalBody>
