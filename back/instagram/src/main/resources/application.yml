@@ -13,6 +13,9 @@ mybatis:
   mapper-locations:
     - /mappers/*.xml
 
+file:
+  path: C:/aws/instagram/back/instagram/upload
+
 jwt:
   secret: QoCRJiglQY5gxz8FFCqouRUqCxVBiKR67ER/FW2aTmjFzCQ04vF/Bcx+OBfsFSzWsmRCt/GKT+5CgOjiClVs/w==
 

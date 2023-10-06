@@ -100,4 +100,15 @@
             username = #{findUserByUsername}
     </select>
 
+    <select id="selecter"
+            parameterType="com.toyproject.instagram.entity.Selecter"
+            resultMap="userMap">
+        select
+            *
+        from
+            user_tb
+        where
+            ${where} = #{who}
+    </select>
+
 </mapper>

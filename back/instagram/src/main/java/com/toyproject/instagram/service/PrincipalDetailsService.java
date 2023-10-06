@@ -24,27 +24,27 @@ public class PrincipalDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String PhoneOrEmailOrUsername) throws UsernameNotFoundException {
 
-        User user = userMapper.findUserByPhone(PhoneOrEmailOrUsername);
-        if(user != null) {
-            return new PrincipalUser(user.getPhone(), user.getPassword(), user.getAuthorities());
-        }
-
-        user = userMapper.findUserByEmail(PhoneOrEmailOrUsername);
-        if(user != null) {
-            return new PrincipalUser(user.getEmail(), user.getPassword(), user.getAuthorities());
-        }
-
-        user = userMapper.findUserByUsername(PhoneOrEmailOrUsername);
-        if(user != null) {
-            return new PrincipalUser(user.getUsername(), user.getPassword(), user.getAuthorities());
-        }
+//        User user = userMapper.findUserByPhone(PhoneOrEmailOrUsername);
+//        if(user != null) {
+//            return new PrincipalUser(user.getPhone(), user.getPassword(), user.getAuthorities());
+//        }
+//
+//        user = userMapper.findUserByEmail(PhoneOrEmailOrUsername);
+//        if(user != null) {
+//            return new PrincipalUser(user.getEmail(), user.getPassword(), user.getAuthorities());
+//        }
+//
+//        user = userMapper.findUserByUsername(PhoneOrEmailOrUsername);
+//        if(user != null) {
+//            return new PrincipalUser(user.getUsername(), user.getPassword(), user.getAuthorities());
+//        }
 
 //        String emailPattern = "^[a-zA-Z0-9]+@[0-9a-zA-Z]+\\.[a-z]*$";
 //        String phonePattern = "^[0-9]{11}+$";
-//        String ReqString = phoneOrEmailOrUsername;
+//        String ReqString = PhoneOrEmailOrUsername;
 //
 //        String whereType = "username";
-
+//
 //        if(Pattern.matches(emailPattern, ReqString)) {
 //            whereType = "email";
 //        }else if(Pattern.matches(phonePattern, ReqString)) {
@@ -56,9 +56,9 @@ public class PrincipalDetailsService implements UserDetailsService {
 //                .who(ReqString)
 //                .build();
 //
-//        System.out.println(selecter);
-//        User user = userMapper.findUserByUserInfo(selecter);
-//        System.out.println(user);
+//        User user = userMapper.selecter(selecter);
+//
+
 
         return null;
 //        throw new UsernameNotFoundException("사용자 정보가 일치하지 않습니다.");

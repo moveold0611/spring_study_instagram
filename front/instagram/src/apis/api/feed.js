@@ -1,4 +1,3 @@
-
 import instance from "../utils/instance"
 
 export const uploadFeed = async (feedFormData) => {

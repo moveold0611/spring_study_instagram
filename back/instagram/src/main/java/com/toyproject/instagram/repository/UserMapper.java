@@ -1,4 +1,5 @@
 package com.toyproject.instagram.repository;
+import com.toyproject.instagram.entity.Selecter;
 import com.toyproject.instagram.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,5 +11,6 @@ public interface UserMapper {
     public User findUserByEmail(String PhoneOrEmailOrUsername);
     public User findUserByUsername(String PhoneOrEmailOrUsername);
 
+    public Selecter selecter(Selecter selecter);
 
 }
