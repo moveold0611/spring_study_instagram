@@ -13,7 +13,7 @@ function AuthRoute({ element }) {
         = useQuery(["authenticate"], authenticate, {
             retry: 0,
             refetchOnWindowFocus: false
-        }); // useQuery는 모두 get요청 
+        }); // useQuery는 모두 get요청
 
 
     if(authenticateState.isLoading) {

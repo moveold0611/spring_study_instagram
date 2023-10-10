@@ -13,5 +13,4 @@ public class MvcConfig implements WebMvcConfigurer {
                 .allowedMethods("*") // 모든 요청 메서드
                 .allowedOrigins("*"); // 모든 요청 주소 허용 ex) http://naver.com, localhost:3000
     }
-    
 }

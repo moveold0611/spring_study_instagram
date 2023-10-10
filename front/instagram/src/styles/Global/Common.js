@@ -6,8 +6,7 @@ export const Common = css`
         
     }
 
-    ::-webkit-scrollbar-thumb {
-        width: 2px;
-        background-color: #dbdbdb;
+    ::-webkit-scrollbar {
+        display: none;
     }
 `;
